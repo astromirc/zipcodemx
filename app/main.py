@@ -4,6 +4,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import settings
 from app.core.exceptions import setup_exception_handlers
 
+from app.auth.routers import router as auth_router
+
 app = FastAPI(
     title=settings.NAME,
     description=settings.DESCRIPTION,
@@ -27,6 +29,10 @@ app.add_middleware(
 
 # Exceptions
 setup_exception_handlers(app)
+
+
+# Routers
+app.include_router(auth_router)
 
 
 # Root
