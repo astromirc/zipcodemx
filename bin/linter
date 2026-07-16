@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+APPDIR="${APPDIR:-.}"
+
+# Ruff
+ruff format $APPDIR
+ruff check $APPDIR --fix

@@ -1,0 +1,36 @@
+services:
+  backend:
+    restart: unless-stopped
+    image: zipcodemx
+    build:
+      context: .
+      target: local
+    command: server
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+
+  postgres: &postgres
+    restart: unless-stopped
+    image: postgres:18-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/18/docker
+    environment:
+      - POSTGRES_USER=zipcodemx
+      - POSTGRES_PASSWORD=zipcodemx
+      - POSTGRES_DB=zipcodemx
+    ports:
+      - "5432:5432"
+
+  postgres-test:
+    # PostgreSQL aislado para tests
+    # Hereda la configuración de postgres sin volumes ni ports
+    <<: *postgres
+    volumes: []
+    ports: []
+
+volumes:
+  postgres_data:

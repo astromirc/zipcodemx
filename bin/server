@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# Inicia servidor según el entorno
+if [ "$ENVIRONMENT" = "local" ]; then
+    exec fastapi dev --host 0.0.0.0
+else
+    exec fastapi run --host 0.0.0.0
+fi
