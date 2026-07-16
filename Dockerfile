@@ -7,6 +7,7 @@ ENV APPDIR=/app
 
 ENV TZ=America/Mexico_City \
     PYTHONUNBUFFERED=1 \
+    UV_LINK_MODE=copy \
     UV_PROJECT_ENVIRONMENT="/venv" \
     PATH="/venv/bin:$PATH"
 
