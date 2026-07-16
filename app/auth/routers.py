@@ -1,11 +1,12 @@
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends
 from fastapi.security import OAuth2PasswordRequestForm
 
 from app.core.security import create_access_token
 
 from app.shared.dependencies import Session
+from app.shared.errors import InactiveUserError, InvalidCredentialsError
 from app.users.services import update_last_login
 
 from .models import Token
@@ -26,20 +27,10 @@ def login(
     )
 
     if user is None:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail=(
-                "Los datos de acceso son incorrectos. "
-                "Por favor, verifica tu información."
-            ),
-            headers={"WWW-Authenticate": "Bearer"},
-        )
+        raise InvalidCredentialsError()
 
     if not user.is_active:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="Tu cuenta está bloqueada.",
-        )
+        raise InactiveUserError()
 
     update_last_login(session=session, user=user)
     token = create_access_token(user.id)

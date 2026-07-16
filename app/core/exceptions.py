@@ -1,8 +1,31 @@
 from fastapi import FastAPI, Request, status
 from fastapi.responses import JSONResponse
 
+from app.shared.errors import InactiveUserError, InvalidCredentialsError
+
 
 def setup_exception_handlers(app: FastAPI) -> None:
+
+    @app.exception_handler(InvalidCredentialsError)
+    def invalid_credentials_handler(
+        _request: Request,
+        exc: InvalidCredentialsError,
+    ) -> JSONResponse:
+        return JSONResponse(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            content={"detail": exc.message},
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+
+    @app.exception_handler(InactiveUserError)
+    def inactive_user_handler(
+        _request: Request,
+        exc: InactiveUserError,
+    ) -> JSONResponse:
+        return JSONResponse(
+            status_code=status.HTTP_403_FORBIDDEN,
+            content={"detail": exc.message},
+        )
 
     # Errores no controlados (asegura respuesta JSON)
     @app.exception_handler(Exception)
