@@ -16,7 +16,7 @@ def authenticate_user(*, session: Session, username: str, password: str) -> User
         verify_password(password, DUMMY_PASSWORD_HASH)
         return None
 
-    if not verify_password(password, user.hashed_password):
+    if not verify_password(password.strip(), user.hashed_password):
         return None
 
     return user

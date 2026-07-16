@@ -32,6 +32,7 @@ def login(
                 "Los datos de acceso son incorrectos. "
                 "Por favor, verifica tu información."
             ),
+            headers={"WWW-Authenticate": "Bearer"},
         )
 
     if not user.is_active:
