@@ -5,7 +5,7 @@ from fastapi.security import OAuth2PasswordRequestForm
 
 from app.core.security import create_access_token
 
-from app.shared.dependencies import Session
+from app.shared.dependencies import SessionDep
 from app.shared.errors import InactiveUserError, InvalidCredentialsError
 from app.users.services import update_last_login
 
@@ -17,7 +17,7 @@ router = APIRouter(prefix="/auth", tags=["auth"])
 
 @router.post("/login")
 def login(
-    session: Session,
+    session: SessionDep,
     form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
 ) -> Token:
     user = authenticate_user(

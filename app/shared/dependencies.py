@@ -13,4 +13,4 @@ def get_session() -> Generator[Session]:
 
 
 # Dependencia de sesión
-Session = Annotated[Session, Depends(get_session)]
+SessionDep = Annotated[Session, Depends(get_session)]
