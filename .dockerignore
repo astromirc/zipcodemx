@@ -1,9 +1,19 @@
-# Git
+### Git ###
 .git
 .gitignore
 .gitattributes
 
-# Python
+### Operating system ###
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+### Python ###
 __pycache__/
 *.py[cod]
 *$py.class
@@ -14,60 +24,48 @@ dist/
 build/
 *.egg
 .eggs/
+.mypy_cache/
+.ruff_cache/
 
-# Entornos virtuales
+### Environments ###
 .env
+.env.*
 .venv
 venv/
 ENV/
 env/
 env.bak/
 venv.bak/
-__pypackages__/
 
-# Testing y cobertura
+### Testing and coverage ###
 .pytest_cache/
+.tox/
+.nox/
 .coverage
 .coverage.*
 htmlcov/
-.tox/
-.nox/
 nosetests.xml
 coverage.xml
 *.cover
 .hypothesis/
-.nyc_output
+cover/
 
-# Caché y herramientas
-.mypy_cache/
-.dmypy.json
-dmypy.json
-.pyre/
-.pytype/
-.ruff_cache/
-.pdm.toml
-
-# Logs
+### Logs ###
 *.log
 logs/
 *.pid
 
-# Archivos de sistema
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-.AppleDouble
-.LSOverride
-Thumbs.db
-ehthumbs.db
-Desktop.ini
-$RECYCLE.BIN/
-
-# Media y archivos temporales
-media/
-uploads/
+### Temp files ###
 temp/
 tmp/
 *.tmp
+
+### IDE ###
+.vscode
+.windsurf
+.cursor
+.idea
+
+### App ###
+media
+uploads

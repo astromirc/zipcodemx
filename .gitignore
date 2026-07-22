@@ -66,6 +66,8 @@ var/
 wheels/
 __pycache__/
 share/python-wheels/
+*.py[cod]
+*$py.class
 *.egg-info/
 .installed.cfg
 *.egg
@@ -86,7 +88,6 @@ ipython_config.py
 .pdm.toml
 __pypackages__/
 *.sage.py
-uv.lock*
 
 # Environments
 .env
@@ -124,4 +125,4 @@ logs/
 .idea
 
 ### App ###
-media/
+media
